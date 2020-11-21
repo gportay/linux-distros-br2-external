@@ -1,0 +1,62 @@
+From d5cefbdc1a13279a625ddbe6d22fd76aa4c72b19 Mon Sep 17 00:00:00 2001
+From: =?utf-8?q?Ga=C3=ABl=20PORTAY?= <gael.portay@collabora.com>
+Date: Thu, 24 Sep 2020 21:51:07 -0400
+Subject: [PATCH] core: allow br2-external trees to provide skeleton
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+Similar to toolchains jpeg and openssl, we now offer a way for
+br2-external trees to provide their skeleton implementation, which gets
+included in the skeleton choice.
+
+Signed-off-by: Gaël PORTAY <gael.portay@collabora.com>
+---
+ support/scripts/br2-external | 9 +++++++++
+ system/Config.in             | 3 +++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/support/scripts/br2-external b/support/scripts/br2-external
+index ededd2d900..35b6025e1f 100755
+--- a/support/scripts/br2-external
++++ b/support/scripts/br2-external
+@@ -159,6 +159,7 @@ do_kconfig() {
+         paths
+         menus
+         toolchains
++        skeleton
+         jpeg
+         openssl
+     )
+@@ -201,6 +202,14 @@ do_kconfig() {
+             printf '\n'
+         } >>"${outputdir}/.br2-external.in.menus"
+ 
++        if [ -f "${br2_ext}/provides/skeleton.in" ]; then
++            printf 'comment "Skeleton from: %s"\n' "${br2_desc}"
++            printf 'source "%s/provides/skeleton.in"\n' "${br2_ext}"
++            printf '\n'
++        else
++            printf '# No skeleton from: %s\n\n' "${br2_desc}"
++        fi >>"${outputdir}/.br2-external.in.skeleton"
++
+         if [ -f "${br2_ext}/provides/toolchains.in" ]; then
+             printf 'comment "Toolchains from: %s"\n' "${br2_desc}"
+             printf 'source "%s/provides/toolchains.in"\n' "${br2_ext}"
+diff --git a/system/Config.in b/system/Config.in
+index 5063797976..d6e4ecb43b 100644
+--- a/system/Config.in
++++ b/system/Config.in
+@@ -23,6 +23,9 @@ config BR2_ROOTFS_SKELETON_CUSTOM
+ 	help
+ 	  Use custom target skeleton.
+ 
++# skeleton from br2-external trees, if any
++source "$BR2_BASE_DIR/.br2-external.in.skeleton"
++
+ endchoice
+ 
+ if BR2_ROOTFS_SKELETON_CUSTOM
+-- 
+2.29.2
+
