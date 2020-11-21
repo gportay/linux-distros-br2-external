@@ -21,7 +21,7 @@ SKELETON_ARCHLINUX_BIN_ARCH_EXCLUDE = /usr/lib/guile/2.2/site-ccache
 SKELETON_ARCHLINUX_KEYRINGS = archlinux
 SKELETON_ARCHLINUX_PACKAGES = $(call qstrip,$(BR2_PACKAGE_SKELETON_ARCHLINUX_PACKAGES))
 
-ifeq ($(BR2_aarch64),y)
+ifeq ($(BR2_aarch64)$(BR2_arm),y)
 SKELETON_ARCHLINUX_DEPENDENCIES += host-archlinuxarm-keyring
 SKELETON_ARCHLINUX_KEYRINGS += archlinuxarm
 endif
@@ -33,6 +33,10 @@ endif
 
 ifeq ($(BR2_aarch64),y)
 SKELETON_ARCHLINUX_QEMU_STATIC = qemu-aarch64-static
+endif
+
+ifeq ($(BR2_arm),y)
+SKELETON_ARCHLINUX_QEMU_STATIC = qemu-arm-static
 endif
 
 ifdef SKELETON_ARCHLINUX_QEMU_STATIC
