@@ -1,4 +1,4 @@
-# Makefile for linux-distros-br2-external
+# Hacked makefile for buildroot
 #
 # Copyright (C) 2020 by Gaël PORTAY <gael.portay@gmail.com>
 #
@@ -17,18 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-override BR2_EXTERNAL += $(CURDIR)
+include Makefile
 
-.PHONY: _all
-_all: all
-
-buildroot/makefile: | buildroot
-	ln -s $(CURDIR)/hackfile.mk $@
-
-buildroot:
-	git clone git clone https://git.buildroot.net/buildroot $@.tmp
-	cd $@.tmp && for patch in $(CURDIR)/patches/*.patch; do git am $$patch; done
-	mv $@.tmp $@
-
-%: | buildroot/makefile
-	$(MAKE) -C buildroot $@ BR2_EXTERNAL="$(BR2_EXTERNAL)"
+target-finalize:;
+	@$(call MESSAGE,"Finalizing target directory hacked!")
