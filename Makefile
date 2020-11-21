@@ -23,7 +23,9 @@ override BR2_EXTERNAL += $(CURDIR)
 _all: all
 
 buildroot:
-	git clone git clone https://git.buildroot.net/buildroot $@
+	git clone git clone https://git.buildroot.net/buildroot $@.tmp
+	cd $@.tmp && for patch in $(CURDIR)/patches/*.patch; do git am $$patch; done
+	mv $@.tmp $@
 
 %: | buildroot 
 	$(MAKE) -C buildroot $@ BR2_EXTERNAL="$(BR2_EXTERNAL)"
