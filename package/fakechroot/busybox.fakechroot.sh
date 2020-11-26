@@ -9,11 +9,19 @@
 set -e
 
 busybox() {
-	# TODO: Detect the dynamic program loader instead of hardcoding it.
+	local interpreter
+
+	LD_LIBRARY_PATH= \
+	LD_PRELOAD= \
+	interpreter="$(file "$FAKECHROOT_BASE_ORIG$FAKECHROOT_CMD_ORIG" | sed -n 's/^.*, interpreter \(.*\), .*$/\1/p')"
+	if [[ ! "$interpreter" ]]
+	then
+		return 127
+	fi
+
 	FAKECHROOT_BASE= \
 	LD_PRELOAD= \
-	LD_PRELOAD= \
-	"$FAKECHROOT_BASE_ORIG/lib/ld-musl-aarch64.so.1" "$FAKECHROOT_BASE_ORIG$FAKECHROOT_CMD_ORIG" "$@"
+	"$FAKECHROOT_BASE_ORIG$interpreter" "$FAKECHROOT_BASE_ORIG$FAKECHROOT_CMD_ORIG" "$@"
 }
 
 argv=("$@")
