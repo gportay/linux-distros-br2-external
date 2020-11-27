@@ -44,3 +44,16 @@ $port
 EOF
 	fi
 fi
+
+if config_isset "BR2_SYSTEM_DHCP"
+then
+	iface="$(config_string "BR2_SYSTEM_DHCP")"
+	line="iface $iface inet dhcp"
+	if ! grep -q "^$line\$" "$TARGET_DIR/etc/network/interfaces"
+	then
+		cat <<EOF >"$TARGET_DIR/etc/network/interfaces"
+auto $iface
+iface $iface inet dhcp
+EOF
+	fi
+fi
