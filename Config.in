@@ -1,2 +1,37 @@
 source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-alpinelinux/Config.in"
 source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-archlinux/Config.in"
+
+if BR2_PACKAGE_SKELETON_ALPINELINUX
+
+menuconfig BR2_TARGET_GENERIC_GETTY
+	bool "Run a getty (login prompt) after boot"
+	default y
+
+if BR2_TARGET_GENERIC_GETTY
+config BR2_TARGET_GENERIC_GETTY_PORT
+	string "TTY port"
+	default "console"
+	help
+	  Specify a port to run a getty on.
+
+config BR2_TARGET_GENERIC_GETTY_BAUDRATE
+	string "Baudrate"
+	default "115200"
+	help
+	  Select a baudrate to use.
+
+config BR2_TARGET_GENERIC_GETTY_TERM
+	string "TERM environment variable"
+	default "vt100"
+	help
+	  Specify a TERM type.
+
+config BR2_TARGET_GENERIC_GETTY_OPTIONS
+	string "other options to pass to getty"
+	default ""
+	help
+	  Any other flags you want to pass to getty,
+	  Refer to getty --help for details.
+endif
+
+endif
