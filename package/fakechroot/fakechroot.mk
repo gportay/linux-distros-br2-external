@@ -14,8 +14,11 @@ define HOST_FAKECHROOT_INSTALL_CMDS
 	$(INSTALL) -D -m644 $(HOST_FAKECHROOT_PKGDIR)/pacstrap.env $(HOST_DIR)/etc/fakechroot/pacstrap.env
 	$(INSTALL) -D -m644 $(HOST_FAKECHROOT_PKGDIR)/arch-chroot.env $(HOST_DIR)/etc/fakechroot/arch-chroot.env
 	$(INSTALL) -D -m755 $(HOST_FAKECHROOT_PKGDIR)/unshare.fakechroot.sh $(HOST_DIR)/bin/unshare.fakechroot
+	$(INSTALL) -D -m644 $(HOST_FAKECHROOT_PKGDIR)/alpine-make-rootfs.env $(HOST_DIR)/etc/fakechroot/alpine-make-rootfs.env
+	$(INSTALL) -D -m755 $(HOST_FAKECHROOT_PKGDIR)/busybox.fakechroot.sh $(HOST_DIR)/bin/busybox.fakechroot
 	$(SED) 's,/usr/local,$(HOST_DIR),' $(HOST_DIR)/etc/fakechroot/pacstrap.env
 	$(SED) 's,/usr/local,$(HOST_DIR),' $(HOST_DIR)/etc/fakechroot/arch-chroot.env
+	$(SED) 's,/usr/local,$(HOST_DIR),' $(HOST_DIR)/etc/fakechroot/alpine-make-rootfs.env
 endef
 
 $(eval $(host-autotools-package))
