@@ -22,10 +22,21 @@ SKELETON_ALPINELINUX_MIRROR = $(call qstrip,$(BR2_PACKAGE_SKELETON_ALPINELINUX_M
 ifneq ($(ARCH),$(HOSTARCH))
 ifeq ($(BR2_x86_64),y)
 SKELETON_ALPINELINUX_QEMU_STATIC = qemu-x64_64-static
+SKELETON_ALPINELINUX_ARCH = x86_64
 endif
 
 ifeq ($(BR2_aarch64),y)
 SKELETON_ALPINELINUX_QEMU_STATIC = qemu-aarch64-static
+SKELETON_ALPINELINUX_ARCH = aarch64
+endif
+
+ifeq ($(BR2_arm),y)
+ifeq ($(BR2_cortex_a5)$(BR2_cortex_a7)$(BR2_cortex_a8)$(BR2_cortex_a9)$(BR2_cortex_a12)$(BR2_cortex_a15)$(BR2_cortex_a15_a7)$(BR2_cortex_a17)$(BR2_cortex_a17_a7),y)
+SKELETON_ALPINELINUX_ARCH = armv7
+else
+SKELETON_ALPINELINUX_ARCH = armhf
+endif
+SKELETON_ALPINELINUX_QEMU_STATIC = qemu-arm-static
 endif
 
 ifdef SKELETON_ALPINELINUX_QEMU_STATIC
@@ -43,7 +54,7 @@ endif
 
 define SKELETON_ALPINELINUX_BUILD_CMDS
 	mkdir -p $(@D)/rootfs/
-	( cd $(@D) && PATH=$(BR_PATH) QEMU_LD_PREFIX=$(@D)/rootfs APK_OPTS="--arch $(ARCH) --allow-untrusted" fakeroot -- fakechroot -- alpine-make-rootfs --packages "$(SKELETON_ALPINELINUX_PACKAGES)" --branch $(SKELETON_ALPINELINUX_BRANCH) --mirror-uri $(SKELETON_ALPINELINUX_MIRROR) $(@D)/rootfs )
+	( cd $(@D) && PATH=$(BR_PATH) QEMU_LD_PREFIX=$(@D)/rootfs APK_OPTS="--arch $(SKELETON_ALPINELINUX_ARCH) --allow-untrusted" fakeroot -- fakechroot -- alpine-make-rootfs --packages "$(SKELETON_ALPINELINUX_PACKAGES)" --branch $(SKELETON_ALPINELINUX_BRANCH) --mirror-uri $(SKELETON_ALPINELINUX_MIRROR) $(@D)/rootfs )
 endef
 
 define SKELETON_ALPINELINUX_INSTALL_TARGET_CMDS
