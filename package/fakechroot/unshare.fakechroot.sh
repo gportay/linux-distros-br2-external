@@ -22,4 +22,5 @@ while [ $# -gt 0 ]; do
     shift
 done
 
+FAKECHROOT_CMD_ORIG= \
 exec "${@:-$SHELL}"
