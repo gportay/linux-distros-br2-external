@@ -11,6 +11,12 @@
 
 set -e
 
+sed -e "\$a 127.0.0.1\tlocalhost" \
+    -e "\$a ::1\tlocalhost" \
+    -e '/^127.0.1.0/d' \
+    -e '/^::1/d' \
+    -i "$TARGET_DIR/etc/hosts"
+
 mkdir -p "$TARGET_DIR/etc/systemd/system/"{multi-user.target.wants,sockets.target.wants,network-online.target.wants,multi-user.target.wants}
 ln -sf /usr/lib/systemd/system/systemd-networkd.service "$TARGET_DIR/etc/systemd/system/dbus-org.freedesktop.network1.service"
 ln -sf /usr/lib/systemd/system/systemd-networkd.service "$TARGET_DIR/etc/systemd/system/multi-user.target.wants/systemd-networkd.service"
