@@ -10,11 +10,6 @@ GENIMAGE_TMP="${BUILD_DIR}/genimage.tmp"
 for arg in "$@"
 do
 	case "${arg}" in
-		--rw)
-		if ! grep -qE -w 'rw' "${BINARIES_DIR}/rpi-firmware/cmdline.txt"; then
-			sed -e '1s,$, rw,' -i "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
-		fi
-		;;
 		--add-miniuart-bt-overlay)
 		if ! grep -qE '^dtoverlay=' "${BINARIES_DIR}/rpi-firmware/config.txt"; then
 			echo "Adding 'dtoverlay=miniuart-bt' to config.txt (fixes ttyAMA0 serial console)."
