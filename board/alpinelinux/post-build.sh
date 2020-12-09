@@ -19,6 +19,17 @@ config_string() {
 	sed -n "/^$1/s,.*=\"\(.*\)\",\1,p" "$BR2_CONFIG"
 }
 
+if config_isset "BR2_TARGET_GENERIC_REMOUNT_ROOTFS_RW"
+then
+# Comment /dev/root entry in fstab. When openrc does not find fstab entry for
+# "/", it will try to remount "/" as "rw".
+        sed -e '\:^/dev/root[[:blank:]]:s/^/# /' -i "$TARGET_DIR/etc/fstab"
+else
+# Uncomment /dev/root entry in fstab which has "ro" option so openrc notices
+# it and doesn't remount root to rw.
+        sed -e '\:^#[[:blank:]]*/dev/root[[:blank:]]:s/^# //' -i "$TARGET_DIR/etc/fstab"
+fi
+
 if config_isset "BR2_TARGET_GENERIC_GETTY"
 then
 	port="$(config_string "BR2_TARGET_GENERIC_GETTY_PORT")"
