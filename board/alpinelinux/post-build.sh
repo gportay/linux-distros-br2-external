@@ -66,3 +66,9 @@ iface $iface inet dhcp
 EOF
 	fi
 fi
+
+mkdir -p "${TARGET_DIR}/etc/runlevels/"{boot,sysinit,default,shutdown}
+ln -sf /etc/init.d/{modules,sysctl,hostname,bootmisc,syslog} "$TARGET_DIR/etc/runlevels/boot/"
+ln -sf /etc/init.d/{devfs,dmesg,mdev,hwdrivers} "${TARGET_DIR}/etc/runlevels/sysinit/"
+ln -sf /etc/init.d/{networking,ntpd} "${TARGET_DIR}/etc/runlevels/default/"
+ln -sf /etc/init.d/{mount-ro,killprocs,savecache} "${TARGET_DIR}/etc/runlevels/shutdown/"
