@@ -22,6 +22,12 @@ config BR2_PACKAGE_SKELETON_ALPINELINUX_PACKAGES
 	help
 	  Additional packages to install into the rootfs.
 
+config BR2_PACKAGE_SKELETON_ALPINELINUX_REPOSITORIES
+	string "repositories"
+	default "main community"
+	help
+	  Alpine list of repositories to check.
+
 config BR2_PACKAGE_SKELETON_ALPINELINUX_BRANCH
 	string "branch"
 	default "latest-stable"
