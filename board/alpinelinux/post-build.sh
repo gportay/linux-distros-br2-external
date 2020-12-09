@@ -80,3 +80,8 @@ if grep -q "^f=" "${TARGET_DIR}/lib/apk/installed"
 then
 	ln -sf /etc/init.d/apk-fix "${TARGET_DIR}/etc/runlevels/default/"
 fi
+
+if [[ -d "${TARGET_DIR}/etc/calamares/" ]]
+then
+	ln -sf /etc/init.d/calamares "${TARGET_DIR}/etc/runlevels/default/"
+fi
