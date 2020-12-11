@@ -11,11 +11,12 @@
 SKELETON_ALPINELINUX_ADD_TOOLCHAIN_DEPENDENCY = NO
 SKELETON_ALPINELINUX_ADD_SKELETON_DEPENDENCY = NO
 
-SKELETON_ALPINELINUX_DEPENDENCIES = host-alpine-make-rootfs host-apk-tools host-fakechroot host-fakeroot
+SKELETON_ALPINELINUX_DEPENDENCIES = host-alpine-keys host-alpine-make-rootfs host-apk-tools host-fakechroot host-fakeroot
 
 SKELETON_ALPINELINUX_PROVIDES = skeleton
 
 SKELETON_ALPINELINUX_PACKAGES = $(call qstrip,$(BR2_PACKAGE_SKELETON_ALPINELINUX_PACKAGES))
+SKELETON_ALPINELINUX_REPOSITORIES = $(call qstrip,$(BR2_PACKAGE_SKELETON_ALPINELINUX_REPOSITORIES))
 SKELETON_ALPINELINUX_BRANCH = $(call qstrip,$(BR2_PACKAGE_SKELETON_ALPINELINUX_BRANCH))
 SKELETON_ALPINELINUX_MIRROR = $(call qstrip,$(BR2_PACKAGE_SKELETON_ALPINELINUX_MIRROR))
 
@@ -54,7 +55,10 @@ endif
 
 define SKELETON_ALPINELINUX_BUILD_CMDS
 	mkdir -p $(@D)/rootfs/
-	( cd $(@D) && PATH=$(BR_PATH) QEMU_LD_PREFIX=$(@D)/rootfs APK_OPTS="--arch $(SKELETON_ALPINELINUX_ARCH) --allow-untrusted" fakeroot -- fakechroot -- alpine-make-rootfs --packages "$(SKELETON_ALPINELINUX_PACKAGES)" --branch $(SKELETON_ALPINELINUX_BRANCH) --mirror-uri $(SKELETON_ALPINELINUX_MIRROR) $(@D)/rootfs )
+	for i in $(SKELETON_ALPINELINUX_REPOSITORIES); do \
+		echo $(SKELETON_ALPINELINUX_MIRROR)/$(SKELETON_ALPINELINUX_BRANCH)/$$i; \
+	done >$(@D)/repositories
+	( cd $(@D) && PATH=$(BR_PATH) QEMU_LD_PREFIX=$(@D)/rootfs APK_OPTS="--arch $(SKELETON_ALPINELINUX_ARCH)" fakeroot -- fakechroot -- alpine-make-rootfs --packages "$(SKELETON_ALPINELINUX_PACKAGES)" --repositories-file $(@D)/repositories --keys-dir $(HOST_DIR)/etc/apk/keys $(@D)/rootfs )
 endef
 
 define SKELETON_ALPINELINUX_INSTALL_TARGET_CMDS
