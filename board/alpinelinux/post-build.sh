@@ -67,6 +67,9 @@ EOF
 	fi
 fi
 
+# Fix https://github.com/OpenRC/openrc/pull/391
+sed -e '/[ -h "${ifname}" ] && continue/s,&&,||,' -i "$TARGET_DIR/etc/init.d/net-online"
+
 mkdir -p "${TARGET_DIR}/etc/runlevels/"{boot,sysinit,default,shutdown}
 ln -sf /etc/init.d/{modules,sysctl,hostname,bootmisc,syslog} "$TARGET_DIR/etc/runlevels/boot/"
 ln -sf /etc/init.d/{devfs,dmesg,mdev,hwdrivers} "${TARGET_DIR}/etc/runlevels/sysinit/"
