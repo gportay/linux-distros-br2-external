@@ -9,6 +9,11 @@
 #  the Free Software Foundation; either version 2.0 of the License, or (at your
 #  option) any later version.
 
+depend() {
+	use dbus
+	after dbus
+}
+
 start() {
 	ebegin "Calamares Installer"
 	if calamares -platform eglfs; then

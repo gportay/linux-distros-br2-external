@@ -89,6 +89,11 @@ then
 	ln -sf /etc/init.d/apk-fix "${TARGET_DIR}/etc/runlevels/default/"
 fi
 
+if [[ -e "${TARGET_DIR}/etc/init.d/dbus" ]]
+then
+	ln -sf /etc/init.d/dbus "${TARGET_DIR}/etc/runlevels/default/"
+fi
+
 if [[ -d "${TARGET_DIR}/etc/calamares/" ]]
 then
 	ln -sf /etc/init.d/calamares "${TARGET_DIR}/etc/runlevels/default/"
