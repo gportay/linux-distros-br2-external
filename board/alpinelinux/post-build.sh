@@ -11,6 +11,39 @@
 
 set -e
 
+cmdline_add() {
+	if [[ -e "$BINARIES_DIR/rpi-firmware/cmdline.txt" ]]
+	then
+		cmdline_del "$@"
+		sed "1s,\$, ${*//,/\\,}," -i "$BINARIES_DIR/rpi-firmware/cmdline.txt"
+	elif [[ -e "$TARGET_DIR/extlinux/extlinux.conf" ]]
+	then
+		cmdline_del "$@"
+		sed "/append/s,\$, ${*//,/\\,}," -i "$TARGET_DIR/extlinux/extlinux.conf"
+	else
+		echo "Error: No such cmdline file" >&2
+		return 1
+	fi
+}
+
+cmdline_del() {
+	if [[ -e "$BINARIES_DIR/rpi-firmware/cmdline.txt" ]]
+	then
+		for i in "${@//,/\\,}"
+		do
+			sed "1s, \?$i,,g" -i "$BINARIES_DIR/rpi-firmware/cmdline.txt"
+		done
+	elif [[ -e "$TARGET_DIR/extlinux/extlinux.conf" ]]
+	then
+		for i in "${@//,/\\,}"
+		do
+			sed "/append/s, \?$i,,g" -i "$TARGET_DIR/extlinux/extlinux.conf"
+		done
+	else
+		echo "Warning: No such cmdline file" >&2
+	fi
+}
+
 config_isset() {
 	grep -Eq "^$1=" "$BR2_CONFIG"
 }
@@ -92,6 +125,15 @@ fi
 if [[ -e "$TARGET_DIR/etc/init.d/dbus" ]]
 then
 	ln -sf /etc/init.d/dbus "$TARGET_DIR/etc/runlevels/default/"
+fi
+
+if [[ -x "$TARGET_DIR/sbin/plymouthd" ]]
+then
+	ln -sf /etc/init.d/plymouth-start "$TARGET_DIR/etc/runlevels/sysinit/"
+	ln -sf /etc/init.d/plymouth-read-write "$TARGET_DIR/etc/runlevels/sysinit/"
+	ln -sf /etc/init.d/plymouth-deactivate "$TARGET_DIR/etc/runlevels/default/"
+	ln -sf /etc/init.d/plymouth-quit "$TARGET_DIR/etc/runlevels/default/"
+	ln -sf /etc/init.d/plymouth-quit-wait "$TARGET_DIR/etc/runlevels/default/"
 fi
 
 if [[ -d "$TARGET_DIR/etc/calamares/" ]]
