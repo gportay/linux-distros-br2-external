@@ -32,10 +32,12 @@ SKELETON_ALPINELINUX_ARCH = aarch64
 endif
 
 ifeq ($(BR2_arm),y)
+SKELETON_ALPINELINUX_ARCH = armhf
+ifeq ($(BR2_cortex_a32)$(BR2_cortex_a35)$(BR2_cortex_a53)$(BR2_cortex_a57)$(BR2_cortex_a57_a53)$(BR2_cortex_a72)$(BR2_cortex_a72_a53)$(BR2_cortex_a73)$(BR2_cortex_a73_a35)$(BR2_cortex_a73_a53)$(BR2_exynos_m1)$(BR2_xgene1),y)
+SKELETON_ALPINELINUX_ARCH = armv7
+endif
 ifeq ($(BR2_cortex_a5)$(BR2_cortex_a7)$(BR2_cortex_a8)$(BR2_cortex_a9)$(BR2_cortex_a12)$(BR2_cortex_a15)$(BR2_cortex_a15_a7)$(BR2_cortex_a17)$(BR2_cortex_a17_a7),y)
 SKELETON_ALPINELINUX_ARCH = armv7
-else
-SKELETON_ALPINELINUX_ARCH = armhf
 endif
 SKELETON_ALPINELINUX_QEMU_STATIC = qemu-arm-static
 endif
