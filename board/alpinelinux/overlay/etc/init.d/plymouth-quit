@@ -11,6 +11,6 @@
 
 start() {
 	ebegin "Plymouth: terminate boot screen"
-	plymouth quit --retain-splash
+	plymouth quit --wait
 	eend $?
 }

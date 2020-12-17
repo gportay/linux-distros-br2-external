@@ -133,7 +133,6 @@ then
 	ln -sf /etc/init.d/plymouth-read-write "$TARGET_DIR/etc/runlevels/sysinit/"
 	ln -sf /etc/init.d/plymouth-deactivate "$TARGET_DIR/etc/runlevels/default/"
 	ln -sf /etc/init.d/plymouth-quit "$TARGET_DIR/etc/runlevels/default/"
-	ln -sf /etc/init.d/plymouth-quit-wait "$TARGET_DIR/etc/runlevels/default/"
 fi
 
 if [[ -d "$TARGET_DIR/etc/calamares/" ]]
