@@ -84,7 +84,7 @@ then
 	ln -sf /etc/init.d/mdev "$TARGET_DIR/etc/runlevels/sysinit/"
 fi
 
-if grep -q "^f=" "$TARGET_DIR/lib/apk/db/installed"
+if grep -q "^f:" "$TARGET_DIR/lib/apk/db/installed"
 then
 	ln -sf /etc/init.d/apk-fix "$TARGET_DIR/etc/runlevels/default/"
 fi
