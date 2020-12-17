@@ -16,7 +16,7 @@ depend() {
 
 start() {
 	ebegin "Plymouth: show boot screen"
-	plymouthd --mode=boot --pid-file=/var/run/plymouthd.pid --attach-to-session
+	plymouthd --mode=boot --pid-file=/var/run/plymouthd.pid
 	plymouth show-splash
 	eend $?
 }
