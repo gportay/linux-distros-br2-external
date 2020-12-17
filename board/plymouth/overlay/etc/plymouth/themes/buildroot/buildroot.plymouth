@@ -1,0 +1,27 @@
+#
+#  SPDX-License-Identifier: GPL-2.0+
+#
+#  This file is part of linux-distros-br2-external.
+#
+#  linux-distros-br2-external is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2.0 of the License, or (at your
+#  option) any later version.
+
+[Plymouth Theme]
+Name=Buildroot
+Description=A theme based on spinner, designed by jimmac that features a simple spinner.
+ModuleName=two-step
+
+[two-step]
+Font=Noto 12
+TitleFont=Noto 30
+ImageDir=/etc/plymouth/themes/buildroot
+HorizontalAlignment=.5
+VerticalAlignment=.75
+Transition=none
+TransitionDuration=0.0
+BackgroundStartColor=0x3498db
+BackgroundEndColor=0x3498db
+WatermarkHorizontalAlignment=.5
+WatermarkVerticalAlignment=.5
