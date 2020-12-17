@@ -13,7 +13,7 @@ do
 		--*=*)
 		# Set option=value
 		optval="${arg:2}"
-		sed -e "/^${opt%%=*}=/d" -i "${BINARIES_DIR}/rpi-firmware/config.txt"
+		sed -e "/^$optval\$/d" -i "${BINARIES_DIR}/rpi-firmware/config.txt"
 		cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
 $optval
 __EOF__
