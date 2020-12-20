@@ -123,11 +123,3 @@ if [[ -e "$TARGET_DIR/etc/init.d/dbus" ]]
 then
 	ln -sf /etc/init.d/dbus "$TARGET_DIR/etc/runlevels/default/"
 fi
-
-if [[ -x "$TARGET_DIR/sbin/plymouthd" ]]
-then
-	ln -sf /etc/init.d/plymouth-start "$TARGET_DIR/etc/runlevels/sysinit/"
-	ln -sf /etc/init.d/plymouth-read-write "$TARGET_DIR/etc/runlevels/sysinit/"
-	ln -sf /etc/init.d/plymouth-deactivate "$TARGET_DIR/etc/runlevels/default/"
-	ln -sf /etc/init.d/plymouth-quit "$TARGET_DIR/etc/runlevels/default/"
-fi

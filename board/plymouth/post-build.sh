@@ -49,6 +49,10 @@ if [[ -x "$TARGET_DIR/bin/plymouthd" ]] ||
    [[ -x "$TARGET_DIR/usr/bin/plymouthd" ]] || 
    [[ -x "$TARGET_DIR/usr/sbin/plymouthd" ]]
 then
+	ln -sf /etc/init.d/plymouth-start "$TARGET_DIR/etc/runlevels/sysinit/"
+	ln -sf /etc/init.d/plymouth-read-write "$TARGET_DIR/etc/runlevels/sysinit/"
+	ln -sf /etc/init.d/plymouth-deactivate "$TARGET_DIR/etc/runlevels/default/"
+	ln -sf /etc/init.d/plymouth-quit "$TARGET_DIR/etc/runlevels/default/"
 	cmdline_del "console=tty1"
 	cmdline_add "splash" "plymouth.ignore-serial-consoles" "vt.global_cursor_default=0"
 	vt+=("vt.color=0x38")
