@@ -103,7 +103,7 @@ fi
 # Fix https://github.com/OpenRC/openrc/pull/391
 sed -e '/[ -h "${ifname}" ] && continue/s,&&,||,' -i "$TARGET_DIR/etc/init.d/net-online"
 
-mkdir -p "$TARGET_DIR/etc/runlevels/"{boot,sysinit,default,shutdown}
+mkdir -p "$TARGET_DIR/etc/runlevels/"{boot,sysinit,default,halt,poweroff,reboot,shutdown}
 ln -sf /etc/init.d/{modules,sysctl,hostname,bootmisc,syslog} "$TARGET_DIR/etc/runlevels/boot/"
 ln -sf /etc/init.d/{devfs,dmesg,hwdrivers} "$TARGET_DIR/etc/runlevels/sysinit/"
 ln -sf /etc/init.d/{networking,ntpd} "$TARGET_DIR/etc/runlevels/default/"
