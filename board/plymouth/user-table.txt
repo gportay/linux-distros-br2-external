@@ -1,0 +1,4 @@
+# https://git.alpinelinux.org/aports/tree/community/polkit/polkit.pre-install
+polkitd 900 polkitd 900 - /var/empty /sbin/nologin polkitd polkitd
+# https://git.alpinelinux.org/aports/tree/main/dbus/dbus.pre-install
+messagebus 901 messagebus 901 - /var/empty /sbin/nologin messagebus messagebus
