@@ -112,9 +112,6 @@ ln -sf /etc/init.d/{mount-ro,killprocs,savecache} "$TARGET_DIR/etc/runlevels/shu
 if [[ -e "$TARGET_DIR/etc/init.d/udev-trigger" ]]
 then
 	ln -sf /etc/init.d/udev-trigger "$TARGET_DIR/etc/runlevels/sysinit/"
-elif [[ -e "$TARGET_DIR/etc/init.d/mdev" ]]
-then
-	ln -sf /etc/init.d/mdev "$TARGET_DIR/etc/runlevels/sysinit/"
 fi
 
 if grep -q "^f:" "$TARGET_DIR/lib/apk/db/installed"
