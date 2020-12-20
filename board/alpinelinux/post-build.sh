@@ -131,8 +131,3 @@ then
 	ln -sf /etc/init.d/plymouth-deactivate "$TARGET_DIR/etc/runlevels/default/"
 	ln -sf /etc/init.d/plymouth-quit "$TARGET_DIR/etc/runlevels/default/"
 fi
-
-if [[ -d "$TARGET_DIR/etc/calamares/" ]]
-then
-	ln -sf /etc/init.d/calamares "$TARGET_DIR/etc/runlevels/default/"
-fi
