@@ -16,7 +16,9 @@ depend() {
 
 start() {
 	ebegin "Fixing apk (postinst's workaround)"
+	plymouth display-message --text="Fixing Package Manager's database"
 	if apk fix; then
+		plymouth display-message --text=
 		rm -f /etc/runlevels/*/$RC_SVCNAME
 	fi
 	eend $?
