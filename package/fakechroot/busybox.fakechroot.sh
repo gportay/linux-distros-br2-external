@@ -13,7 +13,7 @@ busybox() {
 
 	LD_LIBRARY_PATH= \
 	LD_PRELOAD= \
-	interpreter="$(file -L "$FAKECHROOT_BASE_ORIG$FAKECHROOT_CMD_ORIG" | sed -n 's/^.*, interpreter \(.*\), .*$/\1/p')"
+	interpreter="$(file -L "$FAKECHROOT_BASE_ORIG$FAKECHROOT_CMD_ORIG" | sed -n 's/^.*, interpreter \([^,]*\), .*$/\1/p')"
 	if [[ ! "$interpreter" ]]
 	then
 		return 127
