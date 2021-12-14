@@ -26,9 +26,7 @@ buildroot/makefile: | buildroot
 	ln -s $(CURDIR)/hackfile.mk $@
 
 buildroot:
-	git clone git clone https://git.buildroot.net/buildroot $@.tmp
-	cd $@.tmp && for patch in $(CURDIR)/patches/*.patch; do git am $$patch; done
-	mv $@.tmp $@
+	git clone git clone https://git.buildroot.net/buildroot $@
 
 %: | buildroot/makefile
 	$(MAKE) -C buildroot $@ BR2_EXTERNAL="$(BR2_EXTERNAL)"
