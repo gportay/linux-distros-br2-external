@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-ARCH_INSTALL_SCRIPTS_VERSION = 23
-ARCH_INSTALL_SCRIPTS_SITE = https://git.archlinux.org/arch-install-scripts.git/snapshot/
+ARCH_INSTALL_SCRIPTS_VERSION = 24
+ARCH_INSTALL_SCRIPTS_SITE = $(call github,archlinux,arch-install-scripts,v$(ARCH_INSTALL_SCRIPTS_VERSION))
 ARCH_INSTALL_SCRIPTS_LICENSE = GPL2
 ARCH_INSTALL_SCRIPTS_LICENSE_FILES = COPYING
 
