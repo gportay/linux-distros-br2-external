@@ -1,6 +1,6 @@
 # Makefile for linux-distros-br2-external
 #
-# Copyright (C) 2020 by Gaël PORTAY <gael.portay@gmail.com>
+# Copyright (C) 2020-2021 by Gaël PORTAY <gael.portay@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ buildroot/makefile: | buildroot
 	ln -s $(CURDIR)/hackfile.mk $@
 
 buildroot:
-	git clone git clone https://git.buildroot.net/buildroot $@
+	git clone https://git.buildroot.net/buildroot $@
 
 %: | buildroot/makefile
 	$(MAKE) -C buildroot $@ BR2_EXTERNAL="$(BR2_EXTERNAL)"
