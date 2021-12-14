@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-ARCHLINUX_KEYRING_VERSION = 20200622
+ARCHLINUX_KEYRING_VERSION = 20211028
 ARCHLINUX_KEYRING_SITE = https://sources.archlinux.org/other/archlinux-keyring
 ARCHLINUX_KEYRING_LICENSE = GPL-2.0
 
