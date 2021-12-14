@@ -4,8 +4,9 @@
 #
 ################################################################################
 
-PACMAN_VERSION = 5.2.2
-PACMAN_SITE = https://git.archlinux.org/pacman.git/snapshot/
+PACMAN_VERSION = 6.0.1
+PACMAN_SITE = https://sources.archlinux.org/other/pacman/
+PACMAN_SOURCE = pacman-$(PACMAN_VERSION).tar.xz
 PACMAN_LICENSE = GPL-2.0
 PACMAN_LICENSE_FILES = COPYING
 
