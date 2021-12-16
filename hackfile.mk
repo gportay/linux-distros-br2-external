@@ -49,6 +49,18 @@ define TOOLCHAIN_EXTERNAL_MOVE
         fi
 endef
 
+ifeq ($(BR2_ROOTFS_MERGED_USR),y)
+define SYSTEM_BIN_SBIN_LIB_DIRS
+	$(INSTALL) -d -m 0755 $(1)/usr/bin
+	$(INSTALL) -d -m 0755 $(1)/usr/sbin
+	$(INSTALL) -d -m 0755 $(1)/usr/lib
+endef
+else
+define SYSTEM_BIN_SBIN_LIB_DIRS
+	$(INSTALL) -d -m 0755 $(1)/usr/lib
+endef
+endif
+
 target-finalize:;
 	@$(call MESSAGE,"Finalizing target directory hacked!")
 

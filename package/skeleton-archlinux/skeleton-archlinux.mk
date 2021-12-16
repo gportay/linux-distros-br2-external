@@ -11,6 +11,9 @@
 SKELETON_ARCHLINUX_ADD_TOOLCHAIN_DEPENDENCY = NO
 SKELETON_ARCHLINUX_ADD_SKELETON_DEPENDENCY = NO
 
+# The skeleton also handles the merged /usr case in the sysroot
+SKELETON_ARCHLINUX_INSTALL_STAGING = YES
+
 SKELETON_ARCHLINUX_DEPENDENCIES = host-arch-install-scripts host-archlinux-keyring host-fakechroot host-fakeroot \
 				  host-pacman host-pacman-mirrorlist
 
@@ -65,6 +68,14 @@ endef
 
 define SKELETON_ARCHLINUX_INSTALL_TARGET_CMDS
 	$(call SYSTEM_RSYNC,$(@D)/rootfs,$(TARGET_DIR))
+endef
+
+# For the staging dir, we install nothing, but we need the /lib and /usr/lib
+# appropriately setup.
+define SKELETON_ARCHLINUX_INSTALL_STAGING_CMDS
+	$(call SYSTEM_BIN_SBIN_LIB_DIRS,$(STAGING_DIR))
+	$(call SYSTEM_USR_SYMLINKS_OR_DIRS,$(STAGING_DIR))
+	$(call SYSTEM_LIB_SYMLINK,$(STAGING_DIR))
 endef
 
 $(eval $(generic-package))

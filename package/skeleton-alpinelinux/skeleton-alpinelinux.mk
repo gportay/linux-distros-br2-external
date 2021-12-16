@@ -11,6 +11,9 @@
 SKELETON_ALPINELINUX_ADD_TOOLCHAIN_DEPENDENCY = NO
 SKELETON_ALPINELINUX_ADD_SKELETON_DEPENDENCY = NO
 
+# The skeleton also handles the merged /usr case in the sysroot
+SKELETON_ALPINELINUX_INSTALL_STAGING = YES
+
 SKELETON_ALPINELINUX_DEPENDENCIES = host-alpine-keys host-alpine-make-rootfs host-apk-tools host-fakechroot host-fakeroot
 
 SKELETON_ALPINELINUX_PROVIDES = skeleton
@@ -65,6 +68,14 @@ endef
 
 define SKELETON_ALPINELINUX_INSTALL_TARGET_CMDS
 	$(call SYSTEM_RSYNC,$(@D)/rootfs,$(TARGET_DIR))
+endef
+
+# For the staging dir, we install nothing, but we need the /lib and /usr/lib
+# appropriately setup.
+define SKELETON_ALPINELINUX_INSTALL_STAGING_CMDS
+	$(call SYSTEM_BIN_SBIN_LIB_DIRS,$(STAGING_DIR))
+	$(call SYSTEM_USR_SYMLINKS_OR_DIRS,$(STAGING_DIR))
+	$(call SYSTEM_LIB_SYMLINK,$(STAGING_DIR))
 endef
 
 $(eval $(generic-package))
