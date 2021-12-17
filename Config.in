@@ -1,5 +1,5 @@
-source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-alpinelinux/Config.in"
-source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-archlinux/Config.in"
+source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-alpinelinux/Config.in.options"
+source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-archlinux/Config.in.options"
 
 if !BR2_ROOTFS_SKELETON_DEFAULT
 
