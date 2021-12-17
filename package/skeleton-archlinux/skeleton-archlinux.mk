@@ -53,6 +53,7 @@ define SKELETON_ARCHLINUX_REMOVE_QEMU_STATIC
 endef
 SKELETON_ARCHLINUX_POST_BUILD_HOOKS += SKELETON_ARCHLINUX_REMOVE_QEMU_STATIC
 endif
+SKELETON_ARCHLINUX_ENV += QEMU_LD_PREFIX=$(@D)/rootfs
 endif
 
 define SKELETON_ARCHLINUX_BUILD_CMDS
@@ -63,7 +64,7 @@ define SKELETON_ARCHLINUX_BUILD_CMDS
 	mkdir -p $(@D)/rootfs/etc/pacman.d/
 	cp -a $(HOST_DIR)/etc/pacman.d/gnupg $(@D)/rootfs/etc/pacman.d/
 	cp -a $(HOST_DIR)/etc/pacman.d/mirrorlist $(@D)/
-	( cd $(@D) && $(TARGET_MAKE_ENV) QEMU_LD_PREFIX=$(@D)/rootfs fakeroot -- fakechroot -- pacstrap -GMC $(@D)/pacman.conf rootfs $(SKELETON_ARCHLINUX_PACKAGES) --gpgdir $(@D)/rootfs/etc/pacman.d/gnupg --dbpath $(@D)/rootfs/var/lib/pacman --arch $(ARCH) )
+	( cd $(@D) && $(TARGET_MAKE_ENV) $(SKELETON_ARCHLINUX_ENV) fakeroot -- fakechroot -- pacstrap -GMC $(@D)/pacman.conf rootfs $(SKELETON_ARCHLINUX_PACKAGES) --gpgdir $(@D)/rootfs/etc/pacman.d/gnupg --dbpath $(@D)/rootfs/var/lib/pacman --arch $(ARCH) )
 endef
 
 define SKELETON_ARCHLINUX_INSTALL_TARGET_CMDS
