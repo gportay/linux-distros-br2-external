@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-ALPINE_KEYS_VERSION = 2.2-r0
-ALPINE_KEYS_SITE = https://nl.alpinelinux.org/alpine/latest-stable/main/$(TARGET_ARCH)
+ALPINE_KEYS_VERSION = 2.4-r1
+ALPINE_KEYS_SITE = https://nl.alpinelinux.org/alpine/latest-stable/main/$(ARCH)
 ALPINE_KEYS_SOURCE = alpine-keys-$(ALPINE_KEYS_VERSION).apk
 ALPINE_KEYS_LICENSE = GPL-2.0
 ALPINE_KEYS_STRIP_COMPONENTS = 0
