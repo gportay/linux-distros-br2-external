@@ -63,7 +63,7 @@ define SKELETON_ALPINELINUX_BUILD_CMDS
 	for i in $(SKELETON_ALPINELINUX_REPOSITORIES); do \
 		echo $(SKELETON_ALPINELINUX_MIRROR)/$(SKELETON_ALPINELINUX_BRANCH)/$$i; \
 	done >$(@D)/repositories
-	( cd $(@D) && PATH=$(BR_PATH) QEMU_LD_PREFIX=$(@D)/rootfs APK_OPTS="--arch $(SKELETON_ALPINELINUX_ARCH)" fakeroot -- fakechroot -- alpine-make-rootfs --packages "$(SKELETON_ALPINELINUX_PACKAGES)" --repositories-file $(@D)/repositories --keys-dir $(HOST_DIR)/etc/apk/keys $(@D)/rootfs )
+	( cd $(@D) && $(TARGET_MAKE_ENV) QEMU_LD_PREFIX=$(@D)/rootfs APK_OPTS="--arch $(SKELETON_ALPINELINUX_ARCH)" fakeroot -- fakechroot -- alpine-make-rootfs --packages "$(SKELETON_ALPINELINUX_PACKAGES)" --repositories-file $(@D)/repositories --keys-dir $(HOST_DIR)/etc/apk/keys $(@D)/rootfs )
 endef
 
 define SKELETON_ALPINELINUX_INSTALL_TARGET_CMDS
