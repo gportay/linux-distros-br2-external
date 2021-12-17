@@ -7,6 +7,7 @@
 APK_TOOLS_VERSION = 2.10.5
 APK_TOOLS_SITE = $(call github,alpinelinux,apk-tools,v$(APK_TOOLS_VERSION))
 APK_TOOLS_LICENSE = GPL-2.0
+APK_TOOLS_LICENSE_FILES = LICENSE
 
 HOST_APK_TOOLS_DEPENDENCIES = host-openssl host-zlib
 
