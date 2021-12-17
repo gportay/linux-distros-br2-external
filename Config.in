@@ -1,6 +1,8 @@
 source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-alpinelinux/Config.in.options"
 source "$BR2_EXTERNAL_LINUX_DISTROS_PATH/package/skeleton-archlinux/Config.in.options"
 
+menu "System configuration"
+
 if !BR2_ROOTFS_SKELETON_DEFAULT
 
 config BR2_TARGET_GENERIC_HOSTNAME
@@ -129,3 +131,5 @@ config BR2_SYSTEM_DHCP
 	  configuration file.
 
 endif
+
+endmenu
