@@ -64,6 +64,7 @@ define SKELETON_ARCHLINUX_BUILD_CMDS
 	mkdir -p $(@D)/rootfs/etc/pacman.d/
 	cp -a $(HOST_DIR)/etc/pacman.d/gnupg $(@D)/rootfs/etc/pacman.d/
 	cp -a $(HOST_DIR)/etc/pacman.d/mirrorlist $(@D)/
+	$(SED) '/#Server = /s,^#,,' $(@D)/mirrorlist
 	( cd $(@D) && $(TARGET_MAKE_ENV) $(SKELETON_ARCHLINUX_ENV) fakeroot -- fakechroot -- pacstrap -GMC $(@D)/pacman.conf rootfs $(SKELETON_ARCHLINUX_PACKAGES) --gpgdir $(@D)/rootfs/etc/pacman.d/gnupg --dbpath $(@D)/rootfs/var/lib/pacman --arch $(ARCH) )
 endef
 
