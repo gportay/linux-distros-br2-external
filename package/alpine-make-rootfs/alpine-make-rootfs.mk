@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-ALPINE_MAKE_ROOTFS_VERSION = 0.5.1
+ALPINE_MAKE_ROOTFS_VERSION = 0.6.0
 ALPINE_MAKE_ROOTFS_SITE = $(call github,alpinelinux,alpine-make-rootfs,v$(ALPINE_MAKE_ROOTFS_VERSION))
 ALPINE_MAKE_ROOTFS_LICENSE = MIT
 ALPINE_MAKE_ROOTFS_LICENSE_FILES = LICENSE

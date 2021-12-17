@@ -1,5 +1,5 @@
 # Locally calculated
-sha256 9c7f3e6845e063a5d89711b30ed70f438dba3e9096968962542a5ff0aef49136  alpine-make-rootfs-0.5.1.tar.gz
+sha256 702950197889ebf7389b6b1fba59f4ffe1e384fdd98b0f04e7ba78b7b2be4b8d  alpine-make-rootfs-0.6.0.tar.gz
 
 # Locally calculated
-sha256 cf9535679414d5216bd71707fd6f37b6942e501bcd60a149a1e5f346ce5520af  LICENSE
+sha256 a6dcebf455b501f15b554fe680e9857f759a520321c6df339d6f40753e136985  LICENSE
